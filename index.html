@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>RCRamsey Portfolio</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome CSS from CDN -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  <!-- Google web font -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Welcome Section -->
+  <header class>
+    <div class="container text-center">
+      <h1>Welcome to the Ramsey Archives</h1>
+      <!-- <img src="svg/waterfall_1.svg" alt="Waterfall" width="75" height="75">
+      <img src="svg/cyclist.svg" alt="Cyclist" width="75" height="75"> -->
+      <blockquote class="blockquote text-center">
+        <p class="mb-0">I'm a geographer, cartographer and scientist who prefers her data served, visually</p>
+        <footer class="blockquote-footer">RC Ramsey</footer>
+      </blockquote>
+
+
+    </div>
+  </header>
+
+  <!-- Projects Section -->
+  <section id="projects" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/namerica_breweries_2400px.png"><img class="card-img-top"
+                src="images/namerica_breweries430x.png" alt="2019 North America Concentration of Breweries Map"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                North American Breweries
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 13 Nov 2020
+                <p>A density map featuring N. American Brewery concentration in 2019 with a zoom of Minneapolis
+                  MN.</p>
+                <p>Utilized QGIS 3.10. Hexbinning analysis performed through MMQGIS plugin.</p>
+                <p><strong>Data Sources</strong> on map</p>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/2019countypopulationdensityusa1200.png"><img class="card-img-top"
+                src="images/county_pop.png" alt="US County Population Map 2019"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                USA Population by County
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 6 Nov 2020
+                <p>A classed chloropleth map of USA's 2019 population by County.</p>
+                <p>Utilized QGIS 3.10</p>
+                <p><strong>Data Sources</strong> on map</p>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/power_plant_map/index.html"><img class="card-img-top"
+                src="images/windvsolar.png" alt="US Wind vs Solar Energy Map"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                Wind & Solar U.S. Power Plants
+              </h4>
+              <p class="card-text">
+                <p><strong>Authored</strong> 14 Mar 2021</p>
+                <p>Proportional symbol map of US wind and solar power plants based on electric capacity. Popup provides
+                  power plant name and capacity in mw.</p>
+                <p>Data filtered for only wind and solar power plants and radius of circle proportional to electrical
+                  capacity in Leaflet version 1.7.1 in collaboration with OpenStreetMaps.</p>
+                <p><strong>Data Sources</strong> <a target="_blank" href="http://www.eia.gov/electricity/data/eia923/"
+                    class="card-link"> EIA's form 923 </a></p>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="https://rcramsey.github.io/critzone_fragipan_project_sites/"><img
+                class="card-img-top" src="images/fragipan.png"
+                alt="Fragipan Location Map for Pedology Lab Fragipan Project"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                CZ Fragipan Project Locations & Specifics
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 9 April 2021
+                <p>The Critical Zone Pedology Lab Fragipan Site Locations. Individual
+                  sites produce popup displaying a photo of the project site pedon, NRCS assigned soils number and
+                  identified soil series description. Geolocation services enabled.</p>
+                <p>GeoJSON data edited through geojson.io then produced and revised through Leaflet version 1.7.1</p>
+                <p><strong>Data Sources</strong> on map</p>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/falls_map.html"><img class="card-img-top" src="images/falls_nc2.png"
+                alt="Named Falls of NC"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <img src="svg/waterfall_1.svg" alt="Waterfall" width="32" height="32">
+                Triple Falls & Named Falls of North Carolina
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 3 Dec 2020
+                <p>Zoom and pan slippy satellite map containing contours and named waterfalls of North Carolina.</p>
+                <p>QGIS 3.10 used to store/query dataset. GDAL and QGIS 3.10 to convert raster
+                  elevation units and create contours from USGS NED 1/3 arc-second raster DEM. SVG created via Inkscape.
+                  Data shown on Mapbox web map utilizing OpenStreetMap. Geolocation services enabled.</p>
+                <p><strong>Data Sources</strong> <a target="_blank"
+                    href=”https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names”
+                    class="card-link">geonames.usgs.gov</a>
+                </p>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/rrs_map.html"><img class="card-img-top" src="images/RRS_DBBB.png"
+                alt="Red River Scramble DBBB 2020 Route"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                RRS DBBB 2020 Motrocycle Rally Route
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 17 Dec 2020
+                <p>Kentucky's Red River Scramble Motorcycle Rally DBBB Route. Zoom and pan
+                  slippy map featuring 3d representation of elevation, major roads, cities and amenities/points of
+                  interest.</p>
+                <p>QGIS 3.10 used to convert GPX track, create layer, and assign raster elevation units from DEMs. Data
+                  displayed through Mapbox web map collaborating with OpenStreetMap. Geolocation services enabled. </p>
+                <p><strong>Data Sources</strong> <a target="_blank"
+                    href="https://rcramsey.github.io/Red_river_scramble/" class="card-link">Red River Scramble</a></p>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/hh_map.html"><img class="card-img-top" src="images/hh.png"
+                alt="Horsey Hundred Century Route Map 2019"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <img src="svg/cyclist.svg" alt="Cyclist" width="32" height="32"> Horsey
+                Hundred Century Bicycle Route 2015
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 13 Dec 2020
+                <p>Horsey Hundred Century Bicycle Route with Rest stops indicated via SVG.</p>
+                <p>Route extracted from Ride with GPS published by Horsey Hundred Routes and edited within QGIS 3.10.
+                  GPX track and rest stop layer converted for use with Mapbox. SVG created via Inkscape.</p>
+                <p><Strong>Data Sources</Strong><a target="_blank" href="https://ridewithgps.com/routes/7957034"
+                    class="card-link"> Horsey Hundred Routes</a></p>
+
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/denver_home_map/index.html"><img class="card-img-top" src="images/denver.png"
+                alt="Denver Home Hunting Map"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                Denver Home Hunting
+              </h4>
+              <p class="card-text">
+                <p><strong>Authored</strong> 21 March 2021</p>
+                <p>Interactive amenity map for Home Hunting in Denver, CO. Map based on three requested amenities (layer
+                  toggle control enabled) that are limited to 1 km range from map click. Amenity type and description
+                  provided
+                  on click.</p>
+                <p>Drawn using Leaflet version 1.7.1 in collaboration with OpenStreetMaps</p>
+                <p><strong>Data Sources</strong> on map</p>
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <h2>About me</h2>
+          <div class='my-5 clearfix'>
+            <div class="float-md-left mb-5 mr-md-4"><img class="rounded-circle img-fluid"
+                src="images/rcr_snow_2021_200x200.jpg" alt=""></div>
+            <p class="lead">Hi, I'm Rebecca. I'm a Geographer and Cartographer specializing in frontend JS development
+              and web mapping employing the generous opensource use of Mapbox, OpenStreetMaps, and a cool library called
+              leaflet.</p>
+            <p class="lead">When I'm not yelling into the void about coding errors, I'm reading, writing, hiking,
+              camping and making memories with my family.</p>
+            <p class="lead">Check back later to see what new additions have made it into the Ramsey SArchives.</p>  
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Skillz</h3>
+          <dl>
+            <dt>GIS</dt>
+            <dd>QGIS for data analysis, manipulation, and format conversion</dd>
+            <dd>PostGIS/SQL for data querying</dd>
+            <dt>Web Mapping</dt>
+            <dd>Leaflet and Mapbox for raster tilesets, basic thematic mapping, and telling stories with maps</dd>
+            <dt>Coding</dt>
+            <dd>JavaScript</dd>
+          </dl>
+        </div>
+        <div class="col-md-6">
+          <h3>Get in touch!</h3>
+          <ul class="list-unstyled">
+            <li class=""><i class="fa fa-twitter mr-2"></i><a href="https://twitter.com/RRamZmaps">@RRamZmaps</a></li>
+            <li class=" mr-2"><i class="fa fa-github mr-2"></i><a href="https://github.com/RCRamsey">RCRamsey</a></li>
+            
+            <li class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-linkedin" viewBox="0 0 16 16"> 
+                <path
+                  d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" /></svg> <a href="https://www.linkedin.com/in/rebecca-ramsey-58798324/"</a> RCRamsey</li>
+                <li class=""><i class="fa fa-envelope mr-2"></i>rebecca.cripps@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
+    </div>
+  </footer>
+
+  <!-- JQuery JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript Plugin -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

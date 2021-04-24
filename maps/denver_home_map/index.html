@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Finding a Home in Denver</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <!-- Is the is the latest version of Leaflet? -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis|Titillium+Web" rel="stylesheet">
+
+
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #544564;
+      font-family: "Dosis", Sans-Serif;
+      font-size: 100%;
+      font-weight: 300;
+      color: rgb(172, 172, 172);
+    }
+
+    header,
+    section {
+      padding: 6px 10%;
+      margin: 0 auto;
+      width: 80%
+    }
+
+    footer {
+      padding: 6px 10%;
+      margin: 0 auto;
+      width: 80%;
+      font-family: "Titillium Web", Sans-Serif;
+    }
+
+    h1 {
+      display: inline-block;
+      margin-right: 20px;
+      color: rgb(172, 172, 172);
+      font-size: 3.5em;
+      font-weight: 400;
+    }
+
+    h2 {
+      display: inline-block;
+      color: #fc8d62;
+      letter-spacing: 0.05em;
+      margin-top: 0px;
+      font-weight: 200;
+      text-transform: uppercase;
+      ;
+    }
+
+    #map {
+      width: 80%;
+      height: 540px;
+      margin: 10px auto;
+    }
+
+    p {
+      font-size: 1em;
+      color: rgba(170, 170, 170);
+      ;
+      font-weight: 300;
+      font-size: 1.2em;
+    }
+
+    a {
+      color: #66c2a5;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Find Denver home hunting daunting?</h1>
+    <h2>Let the map do the work.</h2>
+  </header>
+
+  <div id='map'></div>
+
+  <footer>
+    <p>Map authored by RC Ramsey</p>
+    <p>You find the perfect Denver house online. You schedule a walk through. You arrive and find it's nowhere close to
+      meeting your needs beyond housing. Take a deep breath and let this map elliminate your frustration.</p>
+
+    <p>Consider your basic needs like food/water and reliable shelter/safety. This map provides just that. With one
+      click you'll find all Food Stores (food/water), Fire Stations (aiding in the protection of your shelter/safety
+      in emergencies), and any After-School-Program (safety) within 1km of your click. Pair this with homes on the
+      market and you've got yourself the ultimate <b>Denver Home</b> Finder.</p>
+
+    <p>Map based on data obtained from <a href="https://www.denvergov.org/opendata/"">Denver Open Data Catalog</a></p>
+  </footer>
+  <!-- Is the is the latest version of Leaflet? -->
+  <script src=" https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> <script src="data/denver-fire-stations.js"></script>
+  <script src="data/denver-food-stores.js"></script>
+  <script src="data/after-school-programs.js"></script>
+
+  <script>
+    var map = L.map('map', {
+    center: [39.7256, -104.9252],
+            zoom: 11,
+    });
+
+      var tiles = L.tileLayer(
+        'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/dark_all/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+          subdomains: 'abcd',
+          maxZoom: 19
+      }).addTo(map);
+
+          // // BEGIN WRITING YOUR SOLUTION CODE HERE
+          // //review the data in the js file
+          // console.log(programs);
+
+          // //⚽create leaflet after-school-program geoJson layer from geoJSON data⚽
+          // var programLayer = L.geoJson(programs, {
+          //   //take points from geoJSON and using their latlng place individula circleMarker layers on leaflet layer
+          //   pointToLayer: function (features, latlng) {
+          //     return L.circleMarker(latlng);
+          //   },
+          //   filter: function (
+          //     features
+          //   ) { // the function defines features as feature. no need to use programs b/c already referenced in L.geoJson(programs, ...)
+          //     //Initial error (resolved in comment above) console tells me that it can't read the property 'type' because it's undefined. Am I not drilling down in the right order? As I read the js file for the after-school-programs.js I interpret geometry's value pair being stored as an object with type and point being key/value paired. Why does the console tell me it is undefined?
+          //     if (features.geometry.type == "Point") {
+          //       return features;
+          //     }
+          //   },
+          //   style: function (features) {
+          //     return {
+          //       color: '#8da0cb',
+          //       fillColor: '#8da0cb',
+          //       weight: 1,
+          //       stroke: 0,
+          //       fillOpacity: 1,
+          //       radius: 5
+          //     }
+          //   },
+          //   onEachFeature: function (feature, layer) {
+          //     layer.on('mousover', function (e) {
+          //       layer.setStyle({
+          //         fillColor: '#d8ec82' //why not change color?
+          //       });
+          //       layer.on('mouseout', function (e) {
+          //         storeLayer.resetStyle(layer)
+          //       });
+          //     });
+          //     var props = feature.properties
+          //     var popup = `<b>${props.ORGANIZATI}</b>`
+          //     layer.bindTooltip(popup)
+          //   }
+          // }).addTo(map);
+
+          // map.on('click', function (e) {
+          //   programLayer.eachLayer(function (layer) {
+          //     var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
+
+          //     if (distance > 1) {
+          //       layer.setStyle({
+          //         fillOpacity: 0.1,
+          //       });
+          //     } else {
+          //       layer.setStyle({
+          //         fillOpacity: 1,
+          //       });
+          //     } // end else
+          //   });
+          // });
+
+
+          // //🔥create leaflet geoJson fire station layer from geoJSON data🔥
+          // var stationLayer = L.geoJson(stations, {
+          //   pointToLayer: function (features, latlng) {
+          //     return L.circleMarker(latlng);
+          //   },
+          //   filter: function (features) {
+          //     if (features.geometry.type == "Point") {
+          //       return features;
+          //     }
+          //   },
+          //   style: function (features) {
+          //     return {
+          //       color: '#fc8d62',
+          //       fillColor: '#fc8d62',
+          //       weight: 1,
+          //       stroke: 0,
+          //       fillOpacity: 1,
+          //       radius: 5
+          //     }
+          //   },
+          //   onEachFeature: function (feature, layer) {
+          //     layer.on('mousover', function (e) {
+          //       layer.setStyle({
+          //         fillColor: '#d8ec82' //why not change color?
+          //       });
+          //       layer.on('mouseout', function (e) {
+          //         storeLayer.resetStyle(layer)
+          //       });
+          //     });
+          //     var props = feature.properties
+          //     var popup = `<b>${props.STATION_NU}</b>`
+          //     layer.bindTooltip(popup)
+          //   }
+          // }).addTo(map);
+
+          // map.on('click', function (e) {
+          //   stationLayer.eachLayer(function (layer) {
+          //     var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
+
+          //     if (distance > 1) {
+          //       layer.setStyle({
+          //         fillOpacity: 0.1,
+          //       });
+          //     } else {
+          //       layer.setStyle({
+          //         fillOpacity: 1,
+          //       });
+          //     } // end else
+          //   });
+          // });
+
+          // //🥦create leaflet geoJson store layer from geoJSON data🥦
+          // var storeLayer = L.geoJson(stores, {
+          //   pointToLayer: function (features, latlng) {
+          //     return L.circleMarker(latlng);
+          //   },
+          //   filter: function (features) {
+          //     if (features.geometry.type == "Point") {
+          //       return features;
+          //     }
+          //   },
+          //   style: function (features) {
+          //     return {
+          //       color: '#66c2a5',
+          //       fillColor: '#66c2a5',
+          //       weight: 1,
+          //       stroke: 0,
+          //       fillOpacity: 1,
+          //       radius: 5
+          //     }
+          //   },
+          //   onEachFeature: function (feature, layer) {
+          //     layer.on('mousover', function (e) {
+          //       layer.setStyle({
+          //         fillColor: '#d8ec82' //why not change color?
+          //       });
+          //       layer.on('mouseout', function (e) {
+          //         storeLayer.resetStyle(layer)
+          //       });
+          //     });
+          //     var props = feature.properties
+          //     var popup = `<b>${props.STORE_NAME}</b>`
+          //     layer.bindTooltip(popup)
+          //   }
+          // }).addTo(map);
+
+          // map.on('click', function (e) {
+          //   storeLayer.eachLayer(function (layer) {
+          //     var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
+
+          //     if (distance > 1) {
+          //       layer.setStyle({
+          //         fillOpacity: 0.1,
+          //       });
+          //     } else {
+          //       layer.setStyle({
+          //         fillOpacity: 1,
+          //       });
+          //     } // end else
+          //   });
+          // });
+
+
+          // var sourcesLayers = {
+          //   "<b style='color:#8da0cb; text-shadow: 0px 0px 1px #333;'>After-School-Program</b>": programLayer,
+          //   "<b style='color:#fc8d62; text-shadow: 0px 0px 1px #333;'>Fire Station</b>": stationLayer,
+          //   "<b style='color:#66c2a5; text-shadow: 0px 0px 1px #333;'>Food Store</b>": storeLayer
+          // }
+
+          // L.control.layers(null, sourcesLayers, {
+          //   collapsed: false
+          // }).addTo(map);
+
+
+          //Identify where values are different for each variable.
+          //Each variable will have diff source, diff color, diff name
+
+          //Create JS object to hold the info to insert in code
+          var layerInfo = {
+            programLayer: {
+              source: programs, // Use the variable name for the value
+              color: '#8da0cb',
+              radius: 5,
+              label: "After School Program",
+              accessor: 'ORGANIZATI'
+            },
+            stationLayer: {
+              source: stations, // Use the variable name for the value
+              color: '#fc8d62',
+              radius: 5,
+              label: "Fire Station",
+              accessor: 'STATION_NU'
+            },
+            storeLayer: {
+              source: stores, // Use the variable name for the value
+              color: '#66c2a5',
+              radius: 5,
+              label: "Grocery Store",
+              accessor: 'STORE_NAME'
+            }
+          };
+
+          //create common styles
+          var commonStyles = {
+            weight: 1,
+            stroke: 0,
+            fillOpacity: 1,
+          };
+
+          //Create empty JS object to hold variable names for each geoJson leaflet layer to create
+          var geoJsonLayers = {};
+
+          //Loop through first object
+          for (var layer in layerInfo) {
+            //shorthand variable amenity so amenity.source or amenity.color
+            amenity = layerInfo[layer]
+
+            //populate geoJsonLayers object with all features
+            //am I calling the different external js sources correctly? Do I use all three names programs, stations, stores there or do I leave it blank?
+            // Access the variable in the object literal with each loop
+            geoJsonLayers[layer] = L.geoJson(amenity.source, {
+
+              //we convert to a layer
+              pointToLayer: function (features, latlng) {
+                return L.circleMarker(latlng, commonStyles);
+              },
+              filter: function(features) {
+                if (features.geometry.type == "Point") {
+                  return features;
+                }
+              },
+              //match the style give in first object
+              style: function (features) {
+                return {
+                  color: amenity.color,
+                  fillColor: amenity.color,
+                  radius: amenity.radius
+                }
+              },
+              onEachFeature: function (feature, pacman) {
+                    var props = feature.properties
+                    var tooltip = `<h3>${amenity.label}</h3>
+                                    ${props[amenity.accessor]}`;
+                    pacman.bindPopup(tooltip);
+                }
+            }).addTo(map);
+
+          }
+
+          //removed this hard coded legend because can use the looping structure below to create in the event
+          //had many many layers to loop through and create a legend.
+            // //add toggle labels for user interaction
+            // var sourcesLabels = {
+            //   "<b style='color:#8da0cb; text-shadow: 0px 0px 1px #333;'>After-School-Program</b>": geoJsonLayers.programLayer,
+            //   "<b style='color:#fc8d62; text-shadow: 0px 0px 1px #333;'>Fire Station</b>": geoJsonLayers.stationLayer,
+            //   "<b style='color:#66c2a5; text-shadow: 0px 0px 1px #333;'>Food Store</b>": geoJsonLayers.storeLayer
+            // }
+
+            // create empty object
+            var denverLocations = {}; 
+
+            // loop through layerInfo
+            for (var layer in layerInfo) {
+                var amenity = layerInfo[layer]
+                // build string for UI text
+                var str = `<b style='color:${amenity.color}'>${amenity.label}s</b>`;
+                // create object property with pair
+                denverLocations[str] = geoJsonLayers[layer];
+            }
+
+            // console.log(geoJsonLayers)
+
+            L.control.layers(null, denverLocations, {
+              collapsed: false
+            }).addTo(map);
+
+            //add eventlistener to loop through above layers when click on map:
+            map.on('click', function (e) {
+              for (var gsLayer in layerInfo) {
+                geoJsonLayers[gsLayer].eachLayer(function (layer) {
+                  var distance = e.latlng.distanceTo(layer.getLatLng()) /1000;
+
+                  if (distance > 1) {
+                    layer.setStyle({
+                      fillOpacity: 0.1
+                    });
+                  } else {
+                    layer.setStyle({
+                      fillOpacity: 1
+                    });
+                  };
+                
+                //create tooltip
+                //add code here
+                })
+              }
+            });
+             
+
+  </script>
+
+</body>
+
+</html>

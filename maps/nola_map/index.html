@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<!-- Use the HTML and CSS you developed in module 01 to fill out this template.-->
+
+<head>
+  <meta charset=utf-8 />
+  <title>Lab 05 Work Template</title>
+
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+  <!-- **************************************************************** -->
+  <!-- Check to make this links to the most current version of Leaflet! -->
+  <!-- **************************************************************** -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin="" />
+  <!-- **************************************************************** -->
+
+  <style>
+    body {
+      margin: 30px;
+      padding: 20px;
+      background: #624a85;
+      font-family: 'Kaushan Script', cursive;
+      font-weight: 300;
+      color: #eec51d;
+      font-size: 100%;
+      /*default font size typically 14-16*/
+    }
+
+    header,
+    section{
+    width: 80%;
+    margin: 10 px auto;
+    }
+
+    footer {
+      width: 80%;
+      margin: 10 px auto;
+      color:#eec51d;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-align: center;
+      color: #eec51d
+    }
+
+    h2 {
+      font-size: 2.5em;
+      font-weight: 300;
+      letter-spacing: .04em;
+    }
+
+    p {
+      Font-Family: 'Kaushan Script', cursive;
+      font-size: 2.0em;
+      line-height: 1.5em;
+    }
+
+    a {
+      font-weight: bold;
+      text-decoration: wavy;
+    }
+
+    a:hover {
+      text-decoration: line-through;
+      color: #1d8647
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+
+
+    /* The map element */
+    #map {
+      width: 100%;
+      height: 500px;
+      border: 3px solid#1d8647;
+    }
+
+    /* Add HTML element styles */
+
+
+
+
+
+    /* Change opacity on hover over the icon class */
+
+    .icon:hover {
+      opacity: .8;
+    }
+
+    /* Modify Leaflet's default popup style */
+
+    .leaflet-popup-content h3 {
+      font-family: 'Darker Grotesque';
+      font-size: 1.3em;
+      margin-bottom: 6px;
+    }
+
+    .leaflet-popup-content p {
+      font-family: 'Darker Grotesque';
+      margin: 3px 0 6px;
+      font-size: 1.1em;
+    }
+
+    .leaflet-popup-content a {
+      font-weight: normal;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Places of interest (pois) <br>in New Orleans, LA </h1>
+  </header>
+
+  <section>
+    <div id='map'></div>
+  </section>
+
+  <section>
+    <p>When planning a visit to NOLA be sure to hit up these treasures! </p>
+  </section>
+
+  <footer>
+        <ul>RC Ramsey obtained their mapping skills through the New Maps Plus Program at UKY
+          <li>See RC Ramsey's projects on GitHub: <a href="https://github.com/RCRamsey">RC Ramsey Github</a></li>
+          <li>Follow NMP on twitter: <a href="https://twitter.com/NewMapsPlus">@NewMapsPlus</a></li>
+    <hr>
+
+    <a href="https://newmapsplus.github.io">
+      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png"
+        alt="University of Kentucky Geography">
+    </a>
+
+    <a href="https://uky-gis.github.io">
+      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png"
+        alt="University of Kentucky Geography">
+    </a>
+  </footer>
+
+
+
+
+  <!-- **************************************************************** -->
+  <!-- Check to make this links to the most current version of Leaflet! -->
+  <!-- **************************************************************** -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <!-- **************************************************************** -->
+  <script>
+    var map = L.map('map', {
+      center: [29.9584, -90.0600],
+      zoom: 14.50
+    });
+
+    // Get basemap URL from Leaflet Providers
+    var basemap_url = 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'
+
+    // Get basemap attributes from Leaflet Providers
+    var basemap_attributes = {
+      maxZoom: 18,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    };
+    // requests some map tiles
+    var tiles = L.tileLayer(basemap_url, basemap_attributes);
+
+    map.addLayer(tiles);
+
+    // Begin writing/modifying code for Lab 05 here
+
+    var hotspots = [{
+      name: "Mariza",
+      properties: {
+        description: "Italian-inspired fare dished out in an airy loft building with an industrial-chic vibe.",
+        coordinates: [29.9629337, -90.0501008],
+        url: 'http://marizaneworleans.com/',
+        phone: '(504) 598-5700',
+        icon: 'green_svgs/restaurant-15.svg'
+      }},
+        {
+          name: "Coop's Place",
+          properties: {
+            description: "Cajun grub, fried chicken & drinks in a busy no-frills space that's open late & 21 & older only.",
+            coordinates: [29.96031, -90.05988],
+            url: 'http://www.coopsplace.net/', 
+            icon: 'green_svgs/restaurant-15.svg' //to edit color can either open svg folder/click svg of interest in vs to edit color direct
+            //or use maki editor site https://labs.mapbox.com/maki-icons/editor/ to make whole set of icons, download and add to folder for index.html
+          }
+        },
+            {
+              name: "Cafe Du Monde French Market",
+              properties: {
+                description: "Iconic New Orleans cafe known for cafe' au laits, chicory coffee & beignets since 1862.",
+                coordinates: [29.95753, -90.06192],
+                url: 'http://www.cafedumonde.com/',
+                phone: '(504)-525-4544',
+                icon: 'green_svgs/cafe-15.svg'
+              }
+            },
+              {
+                name: "Pat O'Brien's",
+                properties: {
+                  description: "Home to two dueling baby grand pianos, hurricane drinks, and a guaranteed good time.",
+                  coordinates: [29.95822,-90.06527],
+                  url: 'https://patobriens.com/',
+                  phone: '(504)-525-4823',
+                  icon: 'green_svgs/bar-15.svg'
+                }
+              }
+    ];
+
+    //console.log(hotspots[0]);
+    //console.log(hotspots[0].name); // Mariza
+    //console.log(hotspots[0].properties); // Object { ... }
+    //console.log(hotspots[0].properties.description); // Italian-inspired fare ...
+    //console.log(hotspots[0].properties.url); // http://marizaneworleans.com/
+    //console.log(hotspots[0].properties.coordinates); // [29.9629337, -90.0501008]
+
+    //build string for popup and place marker on map
+    // variable to reference the zero index (until we get edit this to a loop)
+    for (var i = 0; i < hotspots.length; i++){
+    //should I use a for...of loop instead?
+  
+    //create variable to access properties of looped hotspots in shorthand
+    //basically use props anytime you don't want to write hotspots[i].properties,
+    //see how much faster props is to write
+    var props = hotspots[i].properties;
+
+    //console.log(props); // Object { ... }
+    //console.log(props.description); // Italian-inspired fare ...
+    //console.log(props.url); // http://marizaneworleans.com/
+
+    //variable popup code round 1 
+    //assign a string, wrapping the name of the place within two HTML bold tags
+    var popup = "<b>" + hotspots[i].name + "</b>"; //was the original code in lab lesson
+
+    /*Var popup code round 2
+      var popup = `<h3>${hotspots[i].name}</h3>
+      <p>${props.description}</p>`;
+     */
+
+    //var popup code round 3
+    var popup = `<h3>${hotspots[i].name}</h3>
+     <p>${props.description}</p>
+     <p><b>website</b>: <a href='${props.url}'>${props.url}</a></p>`
+     //<p><b>phone</b>: ${props.phone}</p>` //comment out when using concatentation for phone present vs absent
+
+    var icon = L.icon({
+      iconUrl: props.icon,
+      iconSize: [40, 40],
+      popupAnchor: [0, -22],
+      className: "icon"
+    });
+
+    //if else to concatenate phone to popup if present otherwise ignore adding phone to popup.
+    if(hotspots[i].properties.phone) {
+      console.log("I have digits, give me a call!");
+      popup += `<p><b>phone</b>: ${props.phone}</p>`;
+    } else {
+      console.log("Hmm, something's missing here...check back later");
+    }
+      var marker = L.marker(hotspots[i].properties.coordinates, {
+          icon: icon
+        })
+        .addTo(map)
+        .bindPopup(popup);
+
+      marker.on("mouseover", function () {
+        this.openPopup();
+      });
+      //can remove this mouse out to leave the popup up to click.
+      //perhaps investigate other .on events to see other interacting options
+      //marker.on click  etc.
+     marker.on("mouseout", function () {
+       this.closePopup();
+        });
+    }
+  </script>
+
+</body>
+
+</html>

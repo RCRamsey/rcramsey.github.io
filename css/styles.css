@@ -1,0 +1,54 @@
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/template-overviews/heroic-features)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+
+/*color pallette branding a pizza box colorswall.com/palette/115577
+#b85454
+#e4b4ac
+#5d2626
+#947765
+#d4c1ad
+#6c443c
+*/
+
+body {
+  /* apply custom rules to the body here */
+  font-family: Lato;
+}
+
+a {
+  color: #b85454;
+}
+
+header {
+  padding: 154px 0 100px;
+  background-color: #e4b4ac;
+}
+
+h1{
+  font-size: 3.0em;
+}
+
+
+.card{
+border-top-color: #5d2626;
+border-right-color:#5d2626;
+border-bottom-color: #5d2626;
+border-left-color: #5d2626;
+}
+/* media query when the media is wider than 992px */
+@media (min-width: 992px) {
+  header {
+    padding: 156px 0 100px;
+  }
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+section {
+  padding: 80px 0;
+}
