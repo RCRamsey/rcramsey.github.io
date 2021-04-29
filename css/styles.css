@@ -52,3 +52,8 @@ border-left-color: #5d2626;
 section {
   padding: 80px 0;
 }
+
+.card-img-top {
+  object-fit: cover;
+  height: 25vh;
+}
