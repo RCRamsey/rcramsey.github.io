@@ -63,24 +63,47 @@
   </header>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="breweryModal" tabindex="-1" aria-labelledby="breweryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">N. American Breweries</h5>
+          <h5 class="modal-title" id="breweryModalLabel">N. American Breweries</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <img class="img-fluid"
-                src="images/na-brew.jpg" alt="2019 North America Concentration of Breweries Map">
+          <img class="img-fluid" src="images/na-brew.jpg" alt="2019 North America Concentration of Breweries Map">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <a target="_blank" href="maps/namerica_breweries_2400px.png">
-          <button type="button" class="btn btn-primary">View map</button>
-        </a>
+            <button type="button" class="btn btn-primary">View map</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="unemploymentModal" tabindex="-1" aria-labelledby="unemploymentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="unemploymentModalLabel">Unemployment Rates</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img class="img-fluid" src="images/us_unemployment_county_2001_2015.png"
+            alt="USA Unemployment Rates 2001-2015">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a target="_blank" href="maps/usa_unemployment_map/index.html">
+            <button type="button" class="btn btn-primary">Interactive map</button>
+          </a>
         </div>
       </div>
     </div>
@@ -90,28 +113,8 @@
   <section id="projects" class="bg-light">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a data-toggle="modal" data-target="#exampleModal">
-              <img class="card-img-top"
-              src="images/na-brew.jpg" 
-              alt="2019 North America Concentration of Breweries Map">
-            </a>
-            <div class="card-body">
-              <h4 class="card-title">
-                North American Breweries
-              </h4>
-              <p class="card-text">
-                <strong>Authored</strong> 13 Nov 2020
-                <p>A density map featuring N. American Brewery concentration in 2019 with a zoom of Minneapolis
-                  MN.</p>
-                <p>Utilized QGIS 3.10. Hexbinning analysis performed through MMQGIS plugin.</p>
-                <p><strong>Data Sources</strong> on map</p>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6 portfolio-item">
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
             <a target="_blank" href="maps/2019countypopulationdensityusa1200.png"><img class="card-img-top"
                 src="images/na-density.jpg" alt="US County Population Map 2019"></a>
@@ -121,14 +124,56 @@
               </h4>
               <p class="card-text">
                 <strong>Authored</strong> 6 Nov 2020
-                <p>A classed choropleth map of USA's 2019 population by County.</p>
+                <p>A classed choropleth static map of USA's 2019 population by County.</p>
                 <p>Utilized QGIS 3.10</p>
                 <p><strong>Data Sources</strong> on map</p>
               </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-6 portfolio-item">
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
+          <div class="card h-100">
+            <a data-toggle="modal" data-target="#breweryModal">
+              <img class="card-img-top" src="images/na-brew.jpg"
+                alt="2019 North America Concentration of Breweries Map">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                North American Breweries
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 13 Nov 2020
+                <p>A density static map featuring N. American Brewery concentration in 2019 with a zoom of Minneapolis
+                  MN.</p>
+                <p>Utilized QGIS 3.10. Hexbinning analysis performed through MMQGIS plugin.</p>
+                <p><strong>Data Sources</strong> on map</p>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
+          <div class="card h-100">
+            <a data-toggle="modal" data-target="#unemploymentModal">
+              <img class="card-img-top" src="images/us_unemployment_county_2001_2015.png"
+                alt="USA Unemployment Rates By County Map 2001-2015">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                USA Unemployment Rates by County 2001-2015
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 9 May 2021
+                <p>A timeseries choropleth map with slider detailing unemployment rates of USA counties.</p>
+                <p>CSV data loaded and dynamically produced as layers in Leaflet cued by time slider bar.</p>
+                <p><strong>Data Sources</strong> on map</p>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
             <a target="_blank" href="maps/power_plant_map/index.html"><img class="card-img-top"
                 src="images/windvsolar.png" alt="US Wind vs Solar Energy Map"></a>
@@ -148,27 +193,28 @@
             </div>
           </div>
         </div>
-         <div class="col-lg-6 col-sm-6 portfolio-item">
-           <div class="card h-100">
-             <a target="_blank" href="https://rcramsey.github.io/ky_jail_phone_rates/"><img
-                 class="card-img-top"
-                 src="images/ky_jail_phone_rates.jpg" alt="KY County Jail Phone Rates"></a>
-             <div class="card-body">
-               <h4 class="card-title">
-                 KY County Jail Phone Rates
-               </h4>
-               <p class="card-text">
-                 <strong>Authored</strong> 20 Jun 2021
-                 <p>A Webpage dedicated to investigating the burdens of jail phone rates from 32 facilities in KY.
-                   Primary map focus is a proportional circle radius map of 15 minute phone rates.</p>
-                 <p>CSV data accessed as geoJSON and produced/revised through Leaflet version 1.7.1. Utilized QGIS 3.16
-                   for data manipulation and export of png for secondary maps.</p>
-                 <p><strong>Data Sources</strong> on webpage</p>
-               </p>
-             </div>
-           </div>
-         </div>
-        <div class="col-lg-6 col-sm-6 portfolio-item">
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="https://rcramsey.github.io/ky_jail_phone_rates/"><img class="card-img-top"
+                src="images/ky_jail_phone_rates.jpg" alt="KY County Jail Phone Rates"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                KY County Jail Phone Rates
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 20 Jun 2021
+                <p>A Webpage dedicated to investigating the burdens of jail phone rates from 32 facilities in KY.
+                  Primary map focus is a proportional circle radius map of 15 minute phone rates.</p>
+                <p>CSV data accessed as geoJSON and produced/revised through Leaflet version 1.7.1. Utilized QGIS 3.16
+                  for data manipulation and export of png for secondary maps.</p>
+                <p><strong>Data Sources</strong> on webpage</p>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
             <a target="_blank" href="https://rcramsey.github.io/critzone_fragipan_project_sites/"><img
                 class="card-img-top" src="images/fragipan.png"
@@ -188,7 +234,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-6 portfolio-item">
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
             <a target="_blank" href="maps/falls_map.html"><img class="card-img-top" src="images/falls_nc2.png"
                 alt="Named Falls of NC"></a>
@@ -211,7 +258,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-6 portfolio-item">
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
             <a target="_blank" href="maps/rrs_map.html"><img class="card-img-top" src="images/RRS_DBBB.png"
                 alt="Red River Scramble DBBB 2020 Route"></a>
@@ -232,7 +280,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-6 portfolio-item">
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
             <a target="_blank" href="maps/hh_map.html"><img class="card-img-top" src="images/hh.png"
                 alt="Horsey Hundred Century Route Map 2019"></a>
@@ -253,7 +302,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-6 portfolio-item">
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
             <a target="_blank" href="maps/denver_home_map/index.html"><img class="card-img-top" src="images/denver.png"
                 alt="Denver Home Hunting Map"></a>
@@ -269,7 +319,6 @@
                   on click.</p>
                 <p>Drawn using Leaflet version 1.7.1 in collaboration with OpenStreetMaps</p>
                 <p><strong>Data Sources</strong> on map</p>
-
               </p>
             </div>
           </div>
@@ -292,7 +341,7 @@
               leaflet.</p>
             <p class="lead">When I'm not yelling into the void about coding errors, I'm reading, writing, hiking,
               camping and making memories with my family.</p>
-            <p class="lead">Check back later to see what new additions have made it into the Ramsey Archives.</p>  
+            <p class="lead">Check back later to see what new additions have made it into the Ramsey Archives.</p>
           </div>
         </div>
       </div>
@@ -314,12 +363,13 @@
           <ul class="list-unstyled">
             <li class=""><i class="fa fa-twitter mr-2"></i><a href="https://twitter.com/RRamZmaps">@RRamZmaps</a></li>
             <li class=" mr-2"><i class="fa fa-github mr-2"></i><a href="https://github.com/RCRamsey">RCRamsey</a></li>
-            
+
             <li class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-linkedin" viewBox="0 0 16 16"> 
+                class="bi bi-linkedin" viewBox="0 0 16 16">
                 <path
-                  d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" /></svg> <a href="https://www.linkedin.com/in/rebecca-ramsey-58798324/"</a> RCRamsey</li>
-                <li class=""><i class="fa fa-envelope mr-2"></i>rebecca.cripps@gmail.com</li>
+                  d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                </svg> <a href="https://www.linkedin.com/in/rebecca-ramsey-58798324/" </a> RCRamsey</li> <li class=""><i
+                  class="fa fa-envelope mr-2"></i>rebecca.cripps@gmail.com</li>
           </ul>
         </div>
       </div>

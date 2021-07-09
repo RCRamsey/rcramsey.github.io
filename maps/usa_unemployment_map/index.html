@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>U.S. Unemployment Rates</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo|Lato" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: 'Arvo', sans-serif;
+            color: #0D0000;
+        }
+
+        h1 {
+            /* pulls h1 out of position and makes it absolute in position */
+            position: absolute;
+            z-index: 650;
+            top: 10px;
+            left: 15px;
+            padding: 8px 15px;
+            margin: 0;
+            color: whitesmoke;
+            font-size: 1.5em;
+            background: rgba(25, 25, 25, 0.8);
+            border-radius: 5px;
+        }
+
+        h2 {
+            display: inline-block;
+            color: #001323;
+        }
+
+        /* full screen map 100% wide no padding or margin */
+        #map {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+        }
+
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+
+        p {
+            font-size: 1em;
+            color: #001323;
+        }
+
+        .legend {
+            padding: 6px 8px;
+            font-size: 1em;
+            background: rgba(75, 75, 75, 0.8);
+            color: whitesmoke;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            width: 160px;
+        }
+
+        .legend h3 {
+            font-size: 1.1em;
+            font-weight: bold;
+            line-height: 1em;
+            color: whitesmoke;
+            margin: 0;
+        }
+
+        .legend h3 span {
+            font-size: 1.3em;
+            margin: 0 20px 0 0;
+        }
+
+        .legend ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 12px 4px 0;
+        }
+
+        .legend li {
+            height: 22px;
+        }
+
+        .legend span {
+            width: 30px;
+            height: 20px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        #ui-controls {
+            width: 176px;
+            padding: 8px 25px 8px 15px;
+            background: rgba(75, 75, 75, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            color: whitesmoke;
+        }
+
+        #ui-controls .min {
+            float: left;
+        }
+
+        #ui-controls .max {
+            float: right;
+            margin-right: -15px;
+        }
+
+        .year-slider {
+            width: 100%;
+        }
+
+        label {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>U.S. Unemployment Rates by County: 2001 &ndash; 2015</h1>
+    <div id="map"></div>
+    <div id="ui-controls">
+        <label>
+            <span class="min">2001</span>
+            <span class="max">2015</span>
+            <input type="range" min="2001" max="2015" value="2001" step="1" class="year-slider">
+        </label>
+    </div>
+    <div id="map"></div>
+    <div id="ui-controls">
+        <input type="range" min="2001" , max="2015" , value="2001" , step="1" class="year-slider"></input>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"
+        integrity="sha512-rKFvwjvE4liWPlFnvH4ZhRDfNZ9FOpdkD/BU5gAIA3VS3vOQrQ5BjKgbO3kxebKhHdHcNUHLqxQYSoxee9UwgA=="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js"
+        integrity="sha512-RWI59o+PDXjPl3bakOf3k2ZbDtfvn/OU/ZKe6QmkE0V/ve7vYKEJe0RdkDueS+VkghBazP+1o4LKGON+pHUa5g=="
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        // map options
+        const options = {
+           // center: [41.8283, -99.5795],
+           //zoom: 3.5,
+            scrollWheelZoom: true,
+            zoomSnap: .1,
+            dragging: true,
+            zoomControl: false
+        }
+
+
+        // create the Leaflet map
+        const map = L.map('map', options);
+
+        // request tiles and add to map
+        // const tiles = L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}', {
+        //     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        //     subdomains: 'abcd',
+        //     ext: 'png'
+        // }).addTo(map);
+
+        const tiles =
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+        {
+            attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+            maxZoom: 16
+        }).addTo(map);
+
+
+        // AJAX request for GeoJSON data
+        const countyLayer = $.getJSON("data/us-counties.json", function (counties) {
+                console.log(counties);
+
+                //use Papa.parse to convert CSV data into JSON object
+                //sn: numerical data values encoded as string types
+                Papa.parse('data/us-unemployment-counties.csv', {
+                    download: true,
+                    header: true, //has header with row of column names
+                    complete: function (data) {
+                        // data accessible here
+                        console.log('csv data: ', data);
+
+                        //note that counties also accessible here
+                        console.log('JSON counties: ', counties);
+
+                        //call function and pass data from files on as arguments
+                        processData(counties, data);
+                    }
+
+                }); //end Papa.parse()
+
+            }) //end $.getJSON
+
+            .fail(function () {
+                //if data file fails to load
+                console.log("Oops, an error has occurred. Try again.");
+            });
+
+         // Tell jQuery to wait until data is loaded before executing a function
+        $.when(countyLayer).done(function () {
+        // load, filter, and style the state outline 
+            $.getJSON("https://newmapsplus.github.io/assets/data/us_states_20m.geojson", function (data) {
+                var stateLayer = L.geoJson(data, {
+                style: function (feature) {
+                    return {
+                    color: '#20282e', // Gray
+                    weight: 1.7,
+                    fillOpacity: 0,
+                    interactive: false
+                    };
+                }
+                })
+                // Add layer to map!
+                stateLayer.addTo(map)
+            })
+                .fail(function () {
+                // the data file failed to load
+                console.log("Add data/us_states_20m.geojson")
+                });
+         })
+
+        //////////////////////////////////////////////////////////////
+        //join data
+        function processData(counties, data) {
+
+            // Some of the GEOIDs are not joined, so test for them.
+            // make empty array for for not joined GEOIDs
+            let notJoined = []
+
+            // loop through all state/counties
+            for (let i of counties.features) {
+
+                // set testing variable
+                let joined = false
+
+                // for each of the CSV data rows
+                for (let j of data.data) {
+                    // if the county fips code and data fips code match
+                    if (i.properties["GEOID"] === (j["STATE_FIP"] + j["COUNTY_FIP"])) {
+
+                        //review values prior to re-asigning
+                        //console.log('county fip: ', i.properties["GEOID"]);
+                        // console.log('data fip: ', (j["STATE_FIP"]+j["COUNTY_FIP"]));
+
+                        //re-assign data for corresponding county as county's props
+                        i.properties = j;
+
+                        // If the above is true, then we have a join!
+                        joined = true
+            
+                        //break from inner loop
+                        break;
+                    }
+                    //careful make freeze if lots of data
+                    //console.log('after: ', counties);
+
+                }
+
+                // Test to see if joined variable was not set to true
+                if (!joined) {
+                notJoined.push(i.properties.GEOID)
+                // county.properties = ''
+                }
+            }
+
+            // Which counties are not joined? What is the history of 15005?
+            console.log(notJoined)
+
+
+            //employ nested loop to push processData() values into an array
+            //empty array to store values of unemployment rates
+            const rates = [];
+            // console.log(counties);
+
+            //iterate through all counties
+            counties.features.forEach(function (county) {
+                //iterate through all props of each county
+                for (const prop in county.properties) {
+                    //if attribute is number and not one of fips codes or name
+                    if (prop != "COUNTY_FIP" && prop != "STATE_FIP" && prop != "Name" && prop != "GEOID") {
+                        //push that attribute value into the array
+                        rates.push(Number(county.properties[prop]));
+                    }
+                }
+            });
+            //verify result (confirm no FIPS codes snuck in)
+            console.log(rates);
+
+            // create class breaks (rates array, quantile method, 5 classes)
+            //other options breaks https://gka.github.io/chroma.js/#chroma-limits
+            //🔥need to find break with csv where 15,005% is a value. 
+            //15,005 fips code corresponds to Kalawao County Hawaii which its constitution recognizes but its actually a part or incorporated into Maui County 15,009?
+            //still unclear on why 15,005 shows in the percentage despite not having unemployment data to match in the data file.
+            var breaks = chroma.limits(rates, 'q', 5);
+            // create color generator function
+            var colorize = chroma.scale(['tan', 'brown']).classes(breaks).mode('lab');
+
+            //call draw map
+            drawMap(counties, colorize);
+
+            //call draw legend
+            drawLegend(breaks, colorize);
+        } //end processData()
+
+        //////////////////////////////////////////////////
+        //draw default map
+        function drawMap(counties, colorize) {
+
+            // create Leaflet object with geometry data and add to map
+            const dataLayer = L.geoJson(counties, {
+                style: function (feature) {
+                    return {
+                        color: 'black',
+                        weight: 1,
+                        fillOpacity: 1,
+                        fillColor: '#1f78b4'
+                    };
+                },
+                //add visual affordance
+                onEachFeature: function (feature, layer) {
+                    //on mouse over
+                    layer.on('mouseover', function () {
+                        //change stroke color and bring element to front
+                        layer.setStyle({
+                            color: 'green'
+                        }).bringToFront();
+                    });
+                    // on mouse off
+                    layer.on('mouseout', function () {
+                        //reset layer style to original stroke
+                        layer.setStyle({
+                            color: 'black'
+                        });
+                    });
+                }
+
+
+            }).addTo(map);
+
+            //map.fitBounds is not used here because the aleutian islands are split the way the map is divided. In this instance best to employ map.fitBounds and set top left/bottom right corner of gps coordinates.
+            // first set the zoom/center to the dataLayer's extent
+            map.fitBounds([
+                [50, -130 ],
+                [25, -70]
+        ]);
+
+            // then back the zoom level off a bit (since we're viewing the map full screen)
+            //map.setZoom(map.getZoom() - 0);
+
+            //create slider UI
+            createSliderUI(dataLayer, colorize);
+
+            //call to initially color the map with first timestamp
+            updateMap(dataLayer, colorize, '2001');
+        } //end drawMap()
+
+        ///////////////////////////////////////////////////
+        //draw chloropleth map
+        function updateMap(counties, colorize, currentYear) {
+            //loop through counties using .eachLayer() and apply fillColor value using colorize function using numeric value to do so.
+            counties.eachLayer(function (layer) {
+                //console.log(layer.feature.properties);
+                const props = layer.feature.properties;
+
+                //color update 
+                layer.setStyle({
+                    fillColor: colorize(Number(props[currentYear]))
+                });
+
+                //tooltip vs popup; tooltip is for desktop with pointer (desktops onlys and makes it difficult for tooltips to close on mobile devices.) popup works better with mobile devices. Allows the clicking of a county rather than a hover popup.
+                
+                //popup build
+                let popup = ''
+                if (props["NAME"]) {
+                    popup = `<b>${props["NAME"]}</b><br />
+                    ${props[currentYear]}% Unemployed in ${currentYear}`;
+                } else {
+                    popup = 'No Data'
+                }
+
+    
+                //bind popup to layer
+                layer.bindPopup(popup, {
+                    sticky: true
+
+                });
+            });
+
+        } // end updateMap()
+
+        //////////////////////////////////////////////////////
+        function drawLegend(breaks, colorize) {
+            //create leaflet control for legend
+            const legendControl = L.control({
+                position: 'topright'
+            });
+
+            //when control is added to map
+            legendControl.onAdd = function (map) {
+                //create new div element with class 'legend' and return
+                const legend = L.DomUtil.create('div', 'legend');
+                return legend
+            };
+
+            // add legend control to map
+            legendControl.addTo(map);
+
+            //select div and craete legend title
+            //create unordered list for class ranges, store as ref to var
+            const legend = $('.legend').html("<h3><span>2001</span> Unemployment Rates</h3><ul>");
+            //loop through breaks, apply color
+            for (let i = 0; i < breaks.length - 1; i++) {
+                const color = colorize(breaks[i], breaks);
+
+                // build list item with color block and values (create legend item)
+                const classRange = `<li><span style = "background: ${color}"></span>
+          ${breaks[i].toLocaleString()}% &mdash;
+          ${breaks[i + 1].toLocaleString()}% </li>`
+
+                //append to legend unordered list item
+                $('.legend ul').append(classRange);
+            }
+
+            // Add legend item for missing data
+            $('.legend ul').append(`<li><span style="background:lightgray"></span>No data</li>`)
+
+            //close legend unordered list
+            legend.append("</ul>");
+
+        } // end drawLegend()
+
+        /////////////////////////////////////////////////////////
+        function createSliderUI(dataLayer, colorize) {
+            //create leaflet control for slider
+            const sliderControl = L.control({
+                position: 'bottomleft'
+            });
+
+            //when add to map
+            sliderControl.onAdd = function (map) {
+                //select existing DOM elem with id of "ui-controls"
+                const slider = L.DomUtil.get("ui-controls");
+                //disable scroll and click of map while using control
+                L.DomEvent.disableScrollPropagation(slider);
+                L.DomEvent.disableClickPropagation(slider);
+                //return slider from onAdd method
+                return slider;
+            }
+            //add slide control to map
+            sliderControl.addTo(map);
+
+            //select form element (slider)
+            $(".year-slider")
+                .on("input change", function () { //when user changes, listen for changes
+                    const currentYear = $(this).val(); //set current year to what value is retruned
+                    updateMap(dataLayer, colorize,
+                        currentYear
+                    ); //update map with current year timestamp data passing it through updateMap function
+                    $('.legend h3 span').html(
+                        currentYear
+                    ); //update timestamp in legend header, select div with legend class and replace its html with current Year. Similar changes can occur and change content in any html element, not just legend.
+                });
+        } // end createSliderUI()
+    </script>
+
+</body>
+
+</html>
