@@ -212,7 +212,7 @@
 			zoom: 4
 		}
 
-		// create a Leaflet map in our division container with id of 'map'
+		// create a Leaflet map in division container with id of 'map'
 		var map = L.map('map', options);
 
 		// Leaflet providers base map URL
@@ -281,41 +281,6 @@
 				layer.bindTooltip(popup)
 			}
 		}).addTo(map);
-
-		// //COAL Layer⛏️
-		// var coalLayer = L.geoJson(plants, {
-		// 	pointToLayer: function (feature, latlng) {
-		// 		return L.circleMarker(latlng, commonStyles);
-		// 	},
-		// 	filter: function (feature) {
-		// 		if (feature.properties.fuel_source.Coal) {
-		// 			return feature;
-		// 		}
-		// 	},
-		// 	style: function (feature) {
-		// 		return {
-		// 			color: 'orange',
-		// 			fillColor: 'orange',
-		// 			radius: getRadius(feature.properties.capacity_mw)
-		// 		}
-		// 	},
-		// 	//add user interaction for hovering over power plant
-		// 	onEachFeature: function (feature, layer) {
-		// 		layer.on('mouseover', function (e) {
-		// 			e.target.setStyle({
-		// 				fillColor: 'white'
-		// 			});
-		// 			layer.on('mouseout', function (e) {
-		// 				coalLayer.resetStyle(layer)
-		// 			});
-		// 		})
-		// 		//create popup with bold name and capacity by referencing geoJSON
-		// 		var props = feature.properties
-		// 		//console.log(props.plant_name);
-		// 		var popup = `Name: <b>${props.plant_name}</b><br> Capacity: ${props.capacity_mw} mw `
-		// 		layer.bindTooltip(popup)
-		// 	}
-		// }).addTo(map);
 
 		//WIND Layer🌬️
 		var windLayer = L.geoJson(plants, {
