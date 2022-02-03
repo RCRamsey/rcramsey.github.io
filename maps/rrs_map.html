@@ -49,19 +49,6 @@
 </head>
 
 <body>
-    <!--2nd attempt at legend entry -->
-    <!-- <style>
-            .legend label,
-            .legend span {
-                display:block;
-                float:left;
-                height:15px;
-                width:20%;
-                text-align:center;
-                font-size:9px;
-                color:#808080;
-            }
-        </style> -->
 
     <div id='map'></div>
 
@@ -99,10 +86,6 @@
             // ----------------------------------------------
 
         });
-
-        //additonal portion of attempt in adding legend
-        // map.legendControl.addLegend(document.getElementByID('legend').innerHTML);
-        //end of additional portion needed to add legend
 
         // Add geolocate control to the map.
         map.addControl(new mapboxgl.GeolocateControl({
