@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Arvo|Lato" rel="stylesheet">
 
     <style>
@@ -171,13 +170,6 @@
         // create the Leaflet map
         const map = L.map('map', options);
 
-        // request tiles and add to map
-        // const tiles = L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}', {
-        //     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        //     subdomains: 'abcd',
-        //     ext: 'png'
-        // }).addTo(map);
-
         const tiles =
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
         {
@@ -242,7 +234,7 @@
         //join data
         function processData(counties, data) {
 
-            // Some of the GEOIDs are not joined, so test for them.
+            // Some of the GEOIDs are not joined, test for them here.
             // make empty array for for not joined GEOIDs
             let notJoined = []
 
@@ -282,9 +274,8 @@
                 }
             }
 
-            // Which counties are not joined? What is the history of 15005?
+            // Which counties are not joined?
             console.log(notJoined)
-
 
             //employ nested loop to push processData() values into an array
             //empty array to store values of unemployment rates
@@ -307,9 +298,7 @@
 
             // create class breaks (rates array, quantile method, 5 classes)
             //other options breaks https://gka.github.io/chroma.js/#chroma-limits
-            //🔥need to find break with csv where 15,005% is a value. 
-            //15,005 fips code corresponds to Kalawao County Hawaii which its constitution recognizes but its actually a part or incorporated into Maui County 15,009?
-            //still unclear on why 15,005 shows in the percentage despite not having unemployment data to match in the data file.
+
             var breaks = chroma.limits(rates, 'q', 5);
             // create color generator function
             var colorize = chroma.scale(['tan', 'brown']).classes(breaks).mode('lab');
@@ -356,15 +345,13 @@
 
             }).addTo(map);
 
-            //map.fitBounds is not used here because the aleutian islands are split the way the map is divided. In this instance best to employ map.fitBounds and set top left/bottom right corner of gps coordinates.
+            //map.fitBounds is not used here because the aleutian islands are split the way the map is divided. 
+            //In this instance employ map.fitBounds and set top left/bottom right corner of gps coordinates.
             // first set the zoom/center to the dataLayer's extent
             map.fitBounds([
                 [50, -130 ],
                 [25, -70]
         ]);
-
-            // then back the zoom level off a bit (since we're viewing the map full screen)
-            //map.setZoom(map.getZoom() - 0);
 
             //create slider UI
             createSliderUI(dataLayer, colorize);
@@ -386,7 +373,8 @@
                     fillColor: colorize(Number(props[currentYear]))
                 });
 
-                //tooltip vs popup; tooltip is for desktop with pointer (desktops onlys and makes it difficult for tooltips to close on mobile devices.) popup works better with mobile devices. Allows the clicking of a county rather than a hover popup.
+                // tooltip vs popup; tooltip is for desktop with pointer (desktops onlys and makes it difficult for tooltips to close on mobile devices.) 
+                // popup works better with mobile devices. Allows the clicking of a county rather than a hover popup.
                 
                 //popup build
                 let popup = ''
@@ -424,7 +412,7 @@
             // add legend control to map
             legendControl.addTo(map);
 
-            //select div and craete legend title
+            //select div and create legend title
             //create unordered list for class ranges, store as ref to var
             const legend = $('.legend').html("<h3><span>2001</span> Unemployment Rates</h3><ul>");
             //loop through breaks, apply color
