@@ -132,12 +132,80 @@
     </div>
   </div>
 
+
+
+
+
+
+
   <!-- Projects Section -->
   <section id="projects" class="bg-light">
     <div class="container">
       <div class="row">
 
 
+        <div class="col-lg-4 col-sm-4 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="maps/power_plant_map/index.html"><img class="card-img-top"
+                src="images/windvsolar2.png" alt="US Hydro, Wind vs Solar Energy Map"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                Hydro, Wind & Solar U.S. Power Plants
+              </h4>
+              <p class="card-text">
+                <p><strong>Authored</strong> 14 Mar 2021</p>
+                <p>Proportional symbol map of US wind and solar power plants based on electric capacity. Popup provides
+                  power plant name and capacity in mw.</p>
+                <p>Data filtered for only wind and solar power plants and radius of circle proportional to electrical
+                  capacity in Leaflet version 1.7.1 in collaboration with OpenStreetMaps.</p>
+                <p><strong>Data Sources</strong> <a target="_blank" href="http://www.eia.gov/electricity/data/eia923/"
+                    class="card-link"> EIA's form 923 </a></p>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
+          <div class="card h-100">
+            <a data-toggle="modal" data-target="#unemploymentModal">
+              <img class="card-img-top" src="images/us_unemployment_county_2001_2015.png"
+                alt="USA Unemployment Rates By County Map 2001-2015">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                USA Unemployment Rates by County 2001-2015
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 9 May 2021
+                <p>A timeseries choropleth map with slider detailing unemployment rates of USA counties.</p>
+                <p>CSV data loaded and dynamically produced as layers in Leaflet cued by time slider bar.</p>
+                <p><strong>Data Sources</strong> <a target="_blank" href="https://www.bls.gov/lau/#tables"
+                  class="card-link"> Bureau of Labor Statistics </a> and <a target="_blank" href="https://www.census.gov/"
+                  class="card-link"> Cartographic Boundary Shapefiles </a></p>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-4 portfolio-item">
+          <div class="card h-100">
+            <a target="_blank" href="https://rcramsey.github.io/us-national-peaks/"><img class="card-img-top"
+                src="images/usnat_summitcount.png" alt="US National Mountain Peaks"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                US National Mountain Peaks
+              </h4>
+              <p class="card-text">
+                <strong>Authored</strong> 3 Nov 2021
+                <p>A map exploring the concentration of summit peaks across the US</p>
+                <p>CSV data accessed through a node built script to build hexgrid from 1000s of points with turf.js.
+                  Then d3.js library to fetch data. Produced/revised through Leaflet version 1.7.1.</p>
+                <p><strong>Data Sources</strong> <a target="_blank" href="https://www.usgs.gov/u.s.-board-on-geographic-names/download-gnis-data"
+                  class="card-link"> US Board Geographic Names</a></p>
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
@@ -246,68 +314,7 @@
           </div>
         </div>
         
-        <div class="col-lg-4 col-sm-4 portfolio-item">
-          <div class="card h-100">
-            <a target="_blank" href="maps/power_plant_map/index.html"><img class="card-img-top"
-                src="images/windvsolar2.png" alt="US Hydro, Wind vs Solar Energy Map"></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                Hydro, Wind & Solar U.S. Power Plants
-              </h4>
-              <p class="card-text">
-                <p><strong>Authored</strong> 14 Mar 2021</p>
-                <p>Proportional symbol map of US wind and solar power plants based on electric capacity. Popup provides
-                  power plant name and capacity in mw.</p>
-                <p>Data filtered for only wind and solar power plants and radius of circle proportional to electrical
-                  capacity in Leaflet version 1.7.1 in collaboration with OpenStreetMaps.</p>
-                <p><strong>Data Sources</strong> <a target="_blank" href="http://www.eia.gov/electricity/data/eia923/"
-                    class="card-link"> EIA's form 923 </a></p>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-sm-4 portfolio-item">
-          <div class="card h-100">
-            <a data-toggle="modal" data-target="#unemploymentModal">
-              <img class="card-img-top" src="images/us_unemployment_county_2001_2015.png"
-                alt="USA Unemployment Rates By County Map 2001-2015">
-            </a>
-            <div class="card-body">
-              <h4 class="card-title">
-                USA Unemployment Rates by County 2001-2015
-              </h4>
-              <p class="card-text">
-                <strong>Authored</strong> 9 May 2021
-                <p>A timeseries choropleth map with slider detailing unemployment rates of USA counties.</p>
-                <p>CSV data loaded and dynamically produced as layers in Leaflet cued by time slider bar.</p>
-                <p><strong>Data Sources</strong> <a target="_blank" href="https://www.bls.gov/lau/#tables"
-                  class="card-link"> Bureau of Labor Statistics </a> and <a target="_blank" href="https://www.census.gov/"
-                  class="card-link"> Cartographic Boundary Shapefiles </a></p>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-sm-4 portfolio-item">
-          <div class="card h-100">
-            <a target="_blank" href="https://rcramsey.github.io/us-national-peaks/"><img class="card-img-top"
-                src="images/usnat_summitcount.png" alt="US National Mountain Peaks"></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                US National Mountain Peaks
-              </h4>
-              <p class="card-text">
-                <strong>Authored</strong> 3 Nov 2021
-                <p>A map exploring the concentration of summit peaks across the US</p>
-                <p>CSV data accessed through a node built script to build hexgrid from 1000s of points with turf.js.
-                  Then d3.js library to fetch data. Produced/revised through Leaflet version 1.7.1.</p>
-                <p><strong>Data Sources</strong> <a target="_blank" href="https://www.usgs.gov/u.s.-board-on-geographic-names/download-gnis-data"
-                  class="card-link"> US Board Geographic Names</a></p>
-              </p>
-            </div>
-          </div>
-        </div>
+        
 
         <div class="col-lg-4 col-sm-4 portfolio-item">
           <div class="card h-100">
